@@ -31,9 +31,23 @@ const category = isSystems ? 'Systems Engineering' : (isAI ? 'AI / ML' : 'Softwa
   </p>
   
   <div class="project-tech font-mono">
-    {repo.language === 'Rust' && <span>Rust</span><span>Systems</span><span>Architecture</span>}
-    {repo.name === 'VSSD' && <span>Python</span><span>ML Models</span><span>Data Pipeline</span>}
-    {repo.language !== 'Rust' && repo.name !== 'VSSD' && repo.language && <span>{repo.language}</span>}
+    {repo.language === 'Rust' && (
+      <>
+        <span>Rust</span>
+        <span>Systems</span>
+        <span>Architecture</span>
+      </>
+    )}
+    {repo.name === 'VSSD' && (
+      <>
+        <span>C</span>
+        <span>Systems</span>
+        <span>Virtual Storage</span>
+      </>
+    )}
+    {repo.language !== 'Rust' && repo.name !== 'VSSD' && repo.language && (
+      <span>{repo.language}</span>
+    )}
   </div>
   
   <div class="project-actions">
