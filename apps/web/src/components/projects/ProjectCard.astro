@@ -1,0 +1,195 @@
+---
+// src/components/projects/ProjectCard.astro
+export interface Props {
+  repo: any;
+  featured?: boolean;
+}
+
+const { repo, featured = false } = Astro.props;
+
+// Categorization logic based on name or description (simulated)
+const isSystems = repo.name.toLowerCase().includes('logic') || repo.language === 'Rust' || repo.language === 'C++' || repo.language === 'C';
+const isAI = repo.name.toLowerCase().includes('ai') || repo.name.toLowerCase().includes('vssd') || repo.language === 'Python';
+const category = isSystems ? 'Systems Engineering' : (isAI ? 'AI / ML' : 'Software Engineering');
+---
+
+<div class={`project-card ${featured ? 'featured' : ''}`}>
+  <div class="card-header">
+    <div class="repo-meta font-mono">
+      <span class="category">{category}</span>
+      {repo.language && <span class="lang"><span class="lang-dot"></span>{repo.language}</span>}
+    </div>
+    <div class="repo-stats hidden-mobile">
+      {repo.stargazers_count > 0 && <span>★ {repo.stargazers_count}</span>}
+    </div>
+  </div>
+  
+  <h3 class="project-title">{repo.name}</h3>
+  
+  <p class="project-desc text-muted">
+    {repo.description || 'Experimental systems architecture and implementation.'}
+  </p>
+  
+  <div class="project-tech font-mono">
+    {repo.language === 'Rust' && <span>Rust</span><span>Systems</span><span>Architecture</span>}
+    {repo.name === 'VSSD' && <span>Python</span><span>ML Models</span><span>Data Pipeline</span>}
+    {repo.language !== 'Rust' && repo.name !== 'VSSD' && repo.language && <span>{repo.language}</span>}
+  </div>
+  
+  <div class="project-actions">
+    <a href={repo.html_url} target="_blank" class="action-btn primary">
+      <span>EXPLORE</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <a href={repo.html_url} target="_blank" class="action-btn ghost">GITHUB</a>
+  </div>
+</div>
+
+<style>
+  .project-card {
+    background: var(--dxp-surface);
+    border: 1px solid var(--dxp-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .project-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 0;
+    background: var(--dxp-accent);
+    transition: height 0.3s ease;
+  }
+  
+  .project-card:hover {
+    border-color: var(--dxp-border-active);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transform: translateY(-4px);
+  }
+  
+  .project-card:hover::after {
+    height: 100%;
+  }
+  
+  .featured {
+    grid-column: 1 / -1;
+    background: var(--dxp-surface-strong);
+    border-color: var(--dxp-border-active);
+  }
+  
+  @media (min-width: 768px) {
+    .featured {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+  }
+  
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-size: 0.75rem;
+  }
+  
+  .repo-meta {
+    display: flex;
+    gap: 1rem;
+    color: var(--dxp-text-muted);
+  }
+  
+  .category {
+    color: var(--dxp-accent);
+    text-transform: uppercase;
+  }
+  
+  .lang {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  
+  .lang-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--dxp-text-muted);
+  }
+  
+  .project-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--dxp-text);
+  }
+  
+  .project-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+  }
+  
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .project-tech span {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--dxp-text-muted);
+    border: 1px solid var(--dxp-border);
+  }
+  
+  .project-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+  
+  .primary {
+    background: var(--dxp-accent);
+    color: var(--dxp-bg) !important;
+  }
+  
+  .primary:hover {
+    box-shadow: 0 0 15px var(--dxp-accent-glow);
+    text-shadow: none;
+  }
+  
+  .ghost {
+    color: var(--dxp-text-muted);
+  }
+  
+  .ghost:hover {
+    color: var(--dxp-text);
+    background: rgba(255, 255, 255, 0.1);
+  }
+</style>

@@ -1,0 +1,84 @@
+---
+// src/components/ui/GlassPanel.astro
+export interface Props {
+  title?: string;
+  className?: string;
+  delay?: number;
+}
+
+const { title, className = '', delay = 0 } = Astro.props;
+---
+
+<div class={`glass-panel ${className}`} style={`animation-delay: ${delay}s`}>
+  {title && (
+    <div class="panel-header">
+      <h3 class="panel-title font-mono">{title}</h3>
+      <div class="panel-decorator"></div>
+    </div>
+  )}
+  <div class="panel-content">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .glass-panel {
+    background: var(--dxp-surface);
+    border: 1px solid var(--dxp-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .glass-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--dxp-accent-glow), transparent);
+    opacity: 0.5;
+  }
+
+  .glass-panel:hover {
+    border-color: var(--dxp-border-active);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 15px var(--dxp-accent-glow);
+    transform: translateY(-2px);
+  }
+
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid var(--dxp-border);
+    padding-bottom: 0.75rem;
+  }
+
+  .panel-title {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--dxp-text-muted);
+    margin: 0;
+  }
+  
+  .panel-decorator {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--dxp-accent);
+    box-shadow: 0 0 8px var(--dxp-accent);
+  }
+  
+  .panel-content {
+    color: var(--dxp-text);
+  }
+</style>

@@ -1,0 +1,99 @@
+---
+// src/components/shell/Navigation.astro
+import ThemeSwitcher from '../ui/ThemeSwitcher.astro';
+import StatusBadge from '../ui/StatusBadge.astro';
+---
+
+<header class="os-header">
+  <div class="logo-container">
+    <div class="logo-dot"></div>
+    <div class="logo-text">SOMASUNDARAM <span class="logo-sub">/ DEVPRO</span></div>
+  </div>
+  
+  <nav class="desktop-nav">
+    <a href="#about" class="nav-link font-mono">01. ABOUT</a>
+    <a href="#projects" class="nav-link font-mono">02. PROJECTS</a>
+    <a href="#skills" class="nav-link font-mono">03. SKILLS</a>
+    <a href="#contact" class="nav-link font-mono">04. CONTACT</a>
+  </nav>
+
+  <div class="header-controls">
+    <ThemeSwitcher />
+    <StatusBadge status="online" text="SYS ONLINE" className="hidden-mobile" />
+  </div>
+</header>
+
+<style>
+  .os-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: auto;
+    animation: slideDown 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--dxp-border);
+  }
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .logo-dot {
+    width: 12px;
+    height: 12px;
+    background-color: var(--dxp-accent);
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--dxp-accent-glow);
+    animation: pulse 2s infinite;
+  }
+
+  .logo-text {
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: var(--dxp-text);
+  }
+  
+  .logo-sub {
+    color: var(--dxp-text-muted);
+    font-weight: 400;
+  }
+
+  .desktop-nav {
+    display: none;
+    gap: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .desktop-nav {
+      display: flex;
+    }
+  }
+
+  .nav-link {
+    font-size: 0.85rem;
+    color: var(--dxp-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    position: relative;
+  }
+
+  .nav-link:hover {
+    color: var(--dxp-accent);
+  }
+
+  .header-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .hidden-mobile {
+      display: none;
+    }
+  }
+</style>

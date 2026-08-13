@@ -1,0 +1,145 @@
+---
+// src/components/achievements/AchievementTimeline.astro
+// Placeholder array for achievements if content collections are empty
+const achievements = [
+  {
+    title: 'DXP Core Architecture Completed',
+    date: '2025',
+    description: 'Designed and implemented the core visual environment and data processing pipeline for the DevPro Experience Platform.',
+  },
+  {
+    title: 'VSSD Pipeline Optimization',
+    date: '2024',
+    description: 'Successfully deployed visual semantics processing models with a 40% reduction in inference latency.',
+  },
+  {
+    title: 'Logic-X Foundation',
+    date: '2024',
+    description: 'Established the low-level systems architecture using Rust for experimental engineering capabilities.',
+  }
+];
+---
+
+<section id="achievements" class="achievements-section">
+  <div class="section-header">
+    <h2 class="section-title">MILESTONES</h2>
+    <div class="section-line"></div>
+    <div class="section-meta font-mono text-muted">
+      <span>[ MODULE: ACHIEVEMENTS ]</span>
+      <span>STATUS: ACTIVE</span>
+    </div>
+  </div>
+  
+  <div class="timeline">
+    {achievements.map((item, index) => (
+      <div class="timeline-item">
+        <div class="timeline-node"></div>
+        <div class="timeline-content">
+          <div class="timeline-date font-mono text-muted">{item.date}</div>
+          <h3 class="timeline-title">{item.title}</h3>
+          <p class="timeline-desc text-muted">{item.description}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .achievements-section {
+    padding: 6rem 0;
+    pointer-events: auto;
+    position: relative;
+    z-index: 5;
+  }
+  
+  .section-header {
+    margin-bottom: 4rem;
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+  }
+  
+  .section-line {
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--dxp-accent), transparent);
+    margin-bottom: 1rem;
+  }
+  
+  .section-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+  }
+  
+  .timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 14px;
+    height: 100%;
+    width: 2px;
+    background: var(--dxp-border);
+  }
+  
+  .timeline-item {
+    position: relative;
+    padding-left: 3rem;
+    margin-bottom: 3rem;
+  }
+  
+  .timeline-item:last-child {
+    margin-bottom: 0;
+  }
+  
+  .timeline-node {
+    position: absolute;
+    top: 0;
+    left: 8px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--dxp-surface-strong);
+    border: 2px solid var(--dxp-accent);
+    box-shadow: 0 0 10px var(--dxp-accent-glow);
+  }
+  
+  .timeline-content {
+    background: var(--dxp-surface);
+    border: 1px solid var(--dxp-border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  
+  .timeline-content:hover {
+    border-color: var(--dxp-border-active);
+    transform: translateX(5px);
+  }
+  
+  .timeline-date {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    color: var(--dxp-accent);
+  }
+  
+  .timeline-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+    color: var(--dxp-text);
+  }
+  
+  .timeline-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+</style>

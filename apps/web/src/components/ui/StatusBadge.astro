@@ -1,0 +1,58 @@
+---
+// src/components/ui/StatusBadge.astro
+export interface Props {
+  status?: 'online' | 'offline' | 'idle' | 'active' | 'warning';
+  text?: string;
+  className?: string;
+}
+
+const { status = 'online', text = 'ONLINE', className = '' } = Astro.props;
+---
+
+<div class={`status-badge status-${status} ${className}`}>
+  <span class="status-dot"></span>
+  <span class="status-text font-mono">{text}</span>
+</div>
+
+<style>
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    background: var(--dxp-surface);
+    border: 1px solid var(--dxp-border);
+    font-size: 0.75rem;
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .status-online .status-dot, .status-active .status-dot {
+    background-color: var(--dxp-accent);
+    box-shadow: 0 0 8px var(--dxp-accent-glow);
+    animation: pulse 2s infinite;
+  }
+  
+  .status-online .status-text, .status-active .status-text {
+    color: var(--dxp-accent);
+  }
+
+  .status-offline .status-dot {
+    background-color: #ff3333;
+    box-shadow: 0 0 8px rgba(255, 51, 51, 0.3);
+  }
+
+  .status-idle .status-dot {
+    background-color: #8892b0;
+  }
+  
+  .status-warning .status-dot {
+    background-color: #ffcc00;
+    box-shadow: 0 0 8px rgba(255, 204, 0, 0.3);
+  }
+</style>

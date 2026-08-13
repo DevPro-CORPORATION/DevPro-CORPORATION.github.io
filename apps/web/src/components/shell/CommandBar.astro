@@ -1,0 +1,80 @@
+---
+// src/components/shell/CommandBar.astro
+---
+
+<div class="command-bar-wrapper">
+  <nav class="command-bar">
+    <a href="#about" class="cmd-item" title="About">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+        <circle cx="12" cy="7" r="4"></circle>
+      </svg>
+    </a>
+    <a href="#projects" class="cmd-item" title="Projects">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+        <line x1="8" y1="21" x2="16" y2="21"></line>
+        <line x1="12" y1="17" x2="12" y2="21"></line>
+      </svg>
+    </a>
+    <a href="#skills" class="cmd-item" title="Skills">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+        <polyline points="2 17 12 22 22 17"></polyline>
+        <polyline points="2 12 12 17 22 12"></polyline>
+      </svg>
+    </a>
+    <a href="#contact" class="cmd-item" title="Contact">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+        <polyline points="22,6 12,13 2,6"></polyline>
+      </svg>
+    </a>
+  </nav>
+</div>
+
+<style>
+  .command-bar-wrapper {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    pointer-events: auto;
+    display: none;
+    animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @media (max-width: 768px) {
+    .command-bar-wrapper {
+      display: block;
+    }
+  }
+
+  .command-bar {
+    display: flex;
+    gap: 1rem;
+    background: var(--dxp-surface-strong);
+    padding: 0.75rem 1.5rem;
+    border-radius: 40px;
+    border: 1px solid var(--dxp-border);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+
+  .cmd-item {
+    color: var(--dxp-text-muted);
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+
+  .cmd-item:hover {
+    color: var(--dxp-accent);
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 15px var(--dxp-accent-glow);
+  }
+</style>

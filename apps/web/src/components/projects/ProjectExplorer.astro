@@ -1,0 +1,103 @@
+---
+// src/components/projects/ProjectExplorer.astro
+import ProjectCard from './ProjectCard.astro';
+import { getRepositories } from '../../utils/github';
+
+const repos = await getRepositories();
+
+// Ensure Logic-X and VSSD are prioritized
+let featuredRepos = [];
+let otherRepos = [];
+
+if (Array.isArray(repos)) {
+  featuredRepos = repos.filter((r: any) => 
+    r.name === 'Logic-X' || r.name === 'VSSD'
+  );
+  otherRepos = repos.filter((r: any) => 
+    r.name !== 'Logic-X' && r.name !== 'VSSD' && r.name !== 'DevPro-CORPORATION.github.io'
+  );
+}
+
+// Fallbacks if no data fetched during dev/build without token
+if (featuredRepos.length === 0 && otherRepos.length === 0) {
+  featuredRepos = [
+    { name: 'Logic-X', language: 'Rust', description: 'Advanced systems architecture and experimental computing foundation.', html_url: '#' },
+    { name: 'VSSD', language: 'Python', description: 'Visual systems and semantic data processing pipeline.', html_url: '#' }
+  ];
+  otherRepos = [
+    { name: 'DevPro-Core', language: 'TypeScript', description: 'Core libraries and utilities.', html_url: '#' },
+    { name: 'Robo-Sim', language: 'C++', description: 'Robotics simulation environment.', html_url: '#' }
+  ];
+}
+---
+
+<section id="projects" class="projects-section">
+  <div class="section-header">
+    <h2 class="section-title">ENGINEERING WORKS</h2>
+    <div class="section-line"></div>
+    <div class="section-meta font-mono text-muted">
+      <span>[ MODULE: PROJECTS ]</span>
+      <span>STATUS: ACTIVE</span>
+    </div>
+  </div>
+  
+  <div class="projects-grid">
+    {featuredRepos.map((repo: any) => (
+      <ProjectCard repo={repo} featured={true} />
+    ))}
+    
+    {otherRepos.map((repo: any) => (
+      <ProjectCard repo={repo} />
+    ))}
+  </div>
+</section>
+
+<style>
+  .projects-section {
+    padding: 6rem 0;
+    position: relative;
+    z-index: 5;
+    pointer-events: auto;
+  }
+  
+  .section-header {
+    margin-bottom: 4rem;
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+  }
+  
+  .section-line {
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--dxp-accent), transparent);
+    margin-bottom: 1rem;
+  }
+  
+  .section-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+  }
+  
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  @media (min-width: 768px) {
+    .projects-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .projects-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

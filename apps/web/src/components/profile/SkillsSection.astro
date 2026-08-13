@@ -1,0 +1,162 @@
+---
+// src/components/profile/SkillsSection.astro
+---
+
+<section id="skills" class="skills-section">
+  <div class="section-header">
+    <h2 class="section-title">CAPABILITIES MATRIX</h2>
+    <div class="section-line"></div>
+    <div class="section-meta font-mono text-muted">
+      <span>[ MODULE: SKILLS ]</span>
+      <span>STATUS: ACTIVE</span>
+    </div>
+  </div>
+  
+  <div class="skills-grid">
+    <div class="skill-category">
+      <h3 class="category-title font-mono">PROGRAMMING</h3>
+      <ul class="skill-list">
+        <li><span class="skill-dot"></span>C / C++</li>
+        <li><span class="skill-dot"></span>Rust</li>
+        <li><span class="skill-dot"></span>Java</li>
+        <li><span class="skill-dot"></span>Python</li>
+        <li><span class="skill-dot"></span>JavaScript / TypeScript</li>
+      </ul>
+    </div>
+    
+    <div class="skill-category">
+      <h3 class="category-title font-mono">SYSTEMS</h3>
+      <ul class="skill-list">
+        <li><span class="skill-dot"></span>Linux Internals</li>
+        <li><span class="skill-dot"></span>Systems Programming</li>
+        <li><span class="skill-dot"></span>Docker & Containers</li>
+        <li><span class="skill-dot"></span>Git & CI/CD</li>
+      </ul>
+    </div>
+    
+    <div class="skill-category">
+      <h3 class="category-title font-mono">AI / ML</h3>
+      <ul class="skill-list">
+        <li><span class="skill-dot"></span>Machine Learning</li>
+        <li><span class="skill-dot"></span>LLM Tooling</li>
+        <li><span class="skill-dot"></span>Ollama</li>
+        <li><span class="skill-dot"></span>AI Systems Integration</li>
+        <li><span class="skill-dot"></span>Model Experimentation</li>
+      </ul>
+    </div>
+    
+    <div class="skill-category">
+      <h3 class="category-title font-mono">ROBOTICS / HARDWARE</h3>
+      <ul class="skill-list">
+        <li><span class="skill-dot"></span>Embedded Systems</li>
+        <li><span class="skill-dot"></span>Electronics</li>
+        <li><span class="skill-dot"></span>Hardware/Software Int.</li>
+        <li><span class="skill-dot"></span>Sensor Processing</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills-section {
+    padding: 6rem 0;
+    pointer-events: auto;
+    position: relative;
+    z-index: 5;
+  }
+  
+  .section-header {
+    margin-bottom: 4rem;
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+  }
+  
+  .section-line {
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--dxp-accent), transparent);
+    margin-bottom: 1rem;
+  }
+  
+  .section-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+  }
+  
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  @media (min-width: 600px) {
+    .skills-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .skills-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  
+  .skill-category {
+    background: var(--dxp-surface);
+    border: 1px solid var(--dxp-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  
+  .skill-category:hover {
+    border-color: var(--dxp-border-active);
+    transform: translateY(-2px);
+  }
+  
+  .category-title {
+    color: var(--dxp-accent);
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--dxp-border);
+    padding-bottom: 0.5rem;
+  }
+  
+  .skill-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .skill-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--dxp-text-muted);
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+  }
+  
+  .skill-list li:hover {
+    color: var(--dxp-text);
+  }
+  
+  .skill-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--dxp-text-muted);
+    border-radius: 50%;
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .skill-list li:hover .skill-dot {
+    background: var(--dxp-accent);
+    box-shadow: 0 0 10px var(--dxp-accent-glow);
+  }
+</style>
