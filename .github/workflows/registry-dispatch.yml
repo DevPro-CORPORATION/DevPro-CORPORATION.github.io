@@ -1,0 +1,23 @@
+name: Registry Dispatch Listener
+on:
+  repository_dispatch:
+    types: [registry_update]
+
+jobs:
+  update-registry:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Validate and Append Payload
+        run: |
+          echo "Processing payload from child repository..."
+          # The payload will contain the parsed YAML from the child repository.
+          # Here we will run our registry validation script:
+          # node scripts/validate-registry-payload.js '${{ toJson(github.event.client_payload) }}'
+          echo "Temporary Engineering Decision: Awaiting full validation script implementation."

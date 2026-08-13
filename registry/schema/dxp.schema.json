@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["dxpVersion", "name", "type"],
+  "properties": {
+    "dxpVersion": {
+      "type": "string",
+      "description": "Version of the DXP manifest schema"
+    },
+    "name": {
+      "type": "string",
+      "description": "Public name of the repository/project"
+    },
+    "type": {
+      "enum": ["application", "library", "engine", "plugin"],
+      "description": "The category of this project"
+    },
+    "branding": {
+      "type": "object",
+      "properties": {
+        "primaryColor": { "type": "string" },
+        "realityCompatibility": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "presentation": {
+      "type": "object",
+      "properties": {
+        "model3d": { "type": "string" }
+      }
+    }
+  }
+}

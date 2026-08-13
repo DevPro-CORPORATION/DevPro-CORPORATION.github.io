@@ -1,0 +1,11 @@
+﻿{
+    "deployment_ready":  false,
+    "milestone":  3,
+    "next_milestone":  4,
+    "runtime_verified":  true,
+    "completion":  100,
+    "browser_verified":  true,
+    "name":  "World Engine",
+    "status":  "VERIFIED",
+    "build_verified":  false
+}

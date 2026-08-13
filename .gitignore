@@ -1,0 +1,9 @@
+
+node_modules/
+dist/
+.env
+.env.*
+
+.astro/
+dist/
+node_modules/

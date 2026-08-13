@@ -1,0 +1,14 @@
+---
+// WorldEngineCanvas.astro
+---
+<div id="world-engine-container"></div>
+
+<script>
+    // Mount the WorldEngine dynamically on the client
+    import { WorldEngine } from '../../../../engines/world/src/WorldEngine.js';
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        const engine = new WorldEngine();
+        engine.mount('world-engine-container');
+    });
+</script>
